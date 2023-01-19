@@ -5,9 +5,8 @@ import React from "react";
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { Animated } from "react-animated-css";
-import dotenv from "dotenv";
+import env from 'react-dotenv';
 
-dotenv.config();
 
 export default function Login(props) {
     const navigate = useNavigate();
@@ -27,11 +26,11 @@ export default function Login(props) {
                     <Button data-test='login-btn' onClick={() => {
                         setEntrar('')
                         props.setHabilitado(true)
-                        axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login', props.login).then((resp) => {
+                        axios.post(`${process.env.REACT_APP_API_URL}/login`, props.login).then((resp) => {
                             props.setDadosUsuario(resp)
                             props.setHabilitado(false);
                             console.log(resp)
-                            navigate('/hoje')
+                            navigate('/home')
                         }).catch(() => {
                             alert('Usuário ou senha incorretos')
                             props.setHabilitado(false)
@@ -106,17 +105,17 @@ input{
     background: #FFFFFF;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
-    font-family: 'Lexend Deca';
+    font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    color: #DBDBDB;
+    color:  #000000;
 }
 `
 
 const Button = styled.button`
-    background: #52B6FF;
+    background: #f4b961;
     border-radius: 4.63636px;
     width: 303px;
     height: 45px;

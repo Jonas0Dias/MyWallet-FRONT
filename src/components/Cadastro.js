@@ -4,9 +4,12 @@ import axios from "axios"
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import { ThreeDots } from "react-loader-spinner"
+import env from 'react-dotenv';
+
+
 export default function Cadastro(props){
     const navigate=useNavigate();
-    const [usuario, setUsuario] = React.useState({email:'',name:'',image:'',password:''})
+    const [usuario, setUsuario] = React.useState({email:'',name:'',password:'',passwordConfirmation:''})
     const[entrar, setEntrar] = React.useState('Cadastrar')
     console.log(usuario)
     return(
@@ -14,19 +17,19 @@ export default function Cadastro(props){
         <Imagem>
         
         <img src="./assets/img/MyWallet.png"></img>
-
+            
         </Imagem>
         <Inputs>
 
-        <input data-test = 'email-input' type='email' placeholder="nome" value={usuario.email} onChange={e => setUsuario({...usuario, email: e.target.value})} disabled={props.habilitado}></input>
-        <input data-test ='user-name-input' type='text' placeholder="e-mail" onChange={e => setUsuario({...usuario, name: e.target.value})} disabled={props.habilitado}></input>
-        <input data-test ='user-image-input' type='url' placeholder="senha" onChange={e => setUsuario({...usuario, image: e.target.value})} disabled={props.habilitado}></input>
-        <input data-test = 'password-input' type='password' placeholder="confirme a senha" onChange={e => setUsuario({...usuario, password: e.target.value})} disabled={props.habilitado}></input>
+        <input data-test = 'email-input' type='text' placeholder="nome" value={usuario.name} onChange={e => setUsuario({...usuario, name: e.target.value})} disabled={props.habilitado}></input>
+        <input data-test ='user-name-input' type='email' placeholder="e-mail" value={usuario.email} onChange={e => setUsuario({...usuario, email: e.target.value})} disabled={props.habilitado}></input>
+        <input data-test ='user-image-input' type='password' placeholder="senha" onChange={e => setUsuario({...usuario, password: e.target.value})} disabled={props.habilitado}></input>
+        <input data-test = 'password-input' type='password' placeholder="confirme a senha" onChange={e => setUsuario({...usuario, passwordConfirmation: e.target.value})} disabled={props.habilitado}></input>
 
         <Button onClick={() => {
             setEntrar('')
             props.setHabilitado(true)
-            axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up', usuario).then(()=>  {
+            axios.post(`${process.env.REACT_APP_API_URL}/signup`, usuario).then(()=>  {
                 props.setHabilitado(false);
                 navigate('/')
         }).catch(() => {
@@ -98,17 +101,17 @@ input{
     background: #FFFFFF;
     border: 1px solid #D5D5D5;
     border-radius: 5px;
-    font-family: 'Lexend Deca';
+    font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
     font-size: 19.976px;
     line-height: 25px;
-    color: #DBDBDB;
+    color:  #000000;
 }
 `
 
 const Button = styled.button`
-    background: #52B6FF;
+    background: #f4b961;
     border-radius: 4.63636px;
     width: 303px;
     height: 45px;
