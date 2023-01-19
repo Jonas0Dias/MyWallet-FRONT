@@ -17,7 +17,7 @@ export default function Cadastro(props){
         <Imagem>
         
         <img src="./assets/img/MyWallet.png"></img>
-            
+
         </Imagem>
         <Inputs>
 
@@ -63,7 +63,7 @@ display:flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
-background: #f98c00;
+background: #1b7a00;
 .cadastro{
     font-family: 'Raleway';
     font-style: normal;

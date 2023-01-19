@@ -20,16 +20,16 @@ export default function Home() {
             </section>
 
             <footer>
-            <div><img src="assets/img/+.png"></img></div>
-            <div><img src="assets/img/-.png"></img></div>
+            <div><Link to='/nova-entrada'><img src="assets/img/+.png"></img></Link></div>
+            <div><Link to='/nova-saida'><img src="assets/img/-.png"></img></Link></div>
 
             </footer>
         </HomeStyled>
     )
 }
 
-const HomeStyled = styled.div`
-background:#f98c00;
+export const HomeStyled = styled.div`
+background:#1b7a00;
 height: 100vh;
 padding-left: 24px;
 padding-right: 24px;
@@ -43,10 +43,10 @@ header{
         font-family: 'Raleway';
         font-style: normal;
         font-weight: 700;
-        font-size: 55px;
+        font-size: 25px;
     }
     img{
-        width: 50px;
+        width: 25px;
     }
 }
 section{
@@ -60,7 +60,7 @@ section{
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
-    font-size: 40px;
+    font-size: 25px;
     text-align: center;
     color: #868686;
     }
@@ -74,7 +74,7 @@ footer{
     justify-content:space-between;
     align-items:center;
     div{
-        background:#ffb12a;
+        background:#3a9a1f;
         height: 100%;
         width: 49%;
         display: flex;
@@ -82,8 +82,47 @@ footer{
         justify-content: center;
         border-radius: 5px;
         img{
-            width:50px;
+            width:25px;
         }
     }
 }
+
+.data{
+    display:flex;
+    flex-direction:column;
+    height:188px;
+    justify-content: space-between;
+    input{
+        width: 100%;
+        height: 58px;
+        background: #FFFFFF;
+        border-radius: 5px;
+    }
+    button{
+        width: 101.5%;
+        height: 46px;
+        background: #3a9a1f;
+        border-radius: 5px;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 23px;
+        color: #FFFFFF;
+        border-style: none;
+    }
+    
+}
+.title{
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 31px;
+    color: #FFFFFF;
+    padding-bottom: 24px;
+    padding-top: 24px;
+}
+
+
 `
