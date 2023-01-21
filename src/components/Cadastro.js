@@ -4,27 +4,29 @@ import axios from "axios"
 import React from "react"
 import { useNavigate } from "react-router-dom"
 import { ThreeDots } from "react-loader-spinner"
+import { Imagem } from "./Login"
 import env from 'react-dotenv';
 
 
 export default function Cadastro(props){
     const navigate=useNavigate();
     const [usuario, setUsuario] = React.useState({email:'',name:'',password:'',passwordConfirmation:''})
-    const[entrar, setEntrar] = React.useState('Cadastrar')
+    const[entrar, setEntrar] = React.useState('Register')
     console.log(usuario)
     return(
         <Home>
         <Imagem>
         
-        <img src="./assets/img/MyWallet.png"></img>
+        <img src="./assets/img/carterita.png"></img>
+                    <h1>Carterita</h1>
 
         </Imagem>
         <Inputs>
 
-        <input data-test = 'email-input' type='text' placeholder="nome" value={usuario.name} onChange={e => setUsuario({...usuario, name: e.target.value})} disabled={props.habilitado}></input>
+        <input data-test = 'email-input' type='text' placeholder="name" value={usuario.name} onChange={e => setUsuario({...usuario, name: e.target.value})} disabled={props.habilitado}></input>
         <input data-test ='user-name-input' type='email' placeholder="e-mail" value={usuario.email} onChange={e => setUsuario({...usuario, email: e.target.value})} disabled={props.habilitado}></input>
-        <input data-test ='user-image-input' type='password' placeholder="senha" onChange={e => setUsuario({...usuario, password: e.target.value})} disabled={props.habilitado}></input>
-        <input data-test = 'password-input' type='password' placeholder="confirme a senha" onChange={e => setUsuario({...usuario, passwordConfirmation: e.target.value})} disabled={props.habilitado}></input>
+        <input data-test ='user-image-input' type='password' placeholder="password" onChange={e => setUsuario({...usuario, password: e.target.value})} disabled={props.habilitado}></input>
+        <input data-test = 'password-input' type='password' placeholder="confirm password" onChange={e => setUsuario({...usuario, passwordConfirmation: e.target.value})} disabled={props.habilitado}></input>
 
         <Button onClick={() => {
             setEntrar('')
@@ -35,9 +37,9 @@ export default function Cadastro(props){
         }).catch(() => {
             alert('Não foi possível cadastrar o usuário.')
             props.setHabilitado(false)
-            setEntrar('Cadastrar')
+            setEntrar('Register')
         })
-        }}> {entrar==='Cadastrar' ? entrar : <ThreeDots 
+        }}> {entrar==='Register' ? entrar : <ThreeDots 
         height="80" 
         width="80" 
         radius="9"
@@ -50,7 +52,7 @@ export default function Cadastro(props){
          </Button>
 
         </Inputs>
-        <Link to='/' data-test = 'login-link'><p className="cadastro" > Já tem uma conta? Faça login!</p></Link>
+        <Link to='/' data-test = 'login-link'><p className="cadastro" > Already have an account? Log in!</p></Link>
 
         </Home>
     )
@@ -74,17 +76,6 @@ background: #1b7a00;
 }
 `
 
-const Imagem=styled.div`
-
-h1{
-    font-family: 'Playball';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 68.982px;
-    line-height: 86px;
-    text-align: center;
-    color: #126BA5;
-`
 
 
 const Inputs= styled.div`
@@ -111,7 +102,7 @@ input{
 `
 
 const Button = styled.button`
-    background: #f4b961;
+    background: #3a9a1f;
     border-radius: 4.63636px;
     width: 303px;
     height: 45px;

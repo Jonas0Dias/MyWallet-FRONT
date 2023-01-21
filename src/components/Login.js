@@ -10,34 +10,36 @@ import env from 'react-dotenv';
 
 export default function Login(props) {
     const navigate = useNavigate();
-    const [entrar, setEntrar] = React.useState('Entrar')
+    const [entrar, setEntrar] = React.useState('Log in')
     return (
 
         <Animated animationIn="bounceInLeft" animationOut="bounceOutLeft" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
             <Home>
                 <Imagem>
-                    <img src="./assets/img/MyWallet.png"></img>
+                    <img src="./assets/img/carterita.png"></img>
+                    <h1>Carterita</h1>
                 </Imagem>
                 <Inputs>
 
                     <input data-test='email-input' type='email' placeholder="email" disabled={props.habilitado} onChange={e => props.setLogin({ ...props.login, email: e.target.value })}></input>
-                    <input data-test='password-input' type='password' placeholder="senha" disabled={props.habilitado} onChange={e => props.setLogin({ ...props.login, password: e.target.value })}></input>
+                    <input data-test='password-input' type='password' placeholder="password" disabled={props.habilitado} onChange={e => props.setLogin({ ...props.login, password: e.target.value })}></input>
 
                     <Button data-test='login-btn' onClick={() => {
                         setEntrar('')
                         props.setHabilitado(true)
-                        axios.post(`${process.env.REACT_APP_API_URL}/login`, props.login).then((resp) => {
-                            props.setDadosUsuario(resp)
+                        axios.post(`${process.env.REACT_APP_API_URL}/login`, props.login).then((res) => {
+                            console.log(res.data.id)
+                            props.setDadosUsuario(res.data)
                             props.setHabilitado(false);
-                            console.log(resp)
+                            console.log(res)
                             navigate('/home')
                         }).catch(() => {
                             alert('Usuário ou senha incorretos')
                             props.setHabilitado(false)
-                            setEntrar('Entrar')
+                            setEntrar('Log in')
 
                         })
-                    }} > {entrar === 'Entrar' ? entrar : <ThreeDots
+                    }} > {entrar === 'Log in' ? entrar : <ThreeDots
                         height="80"
                         width="80"
                         radius="9"
@@ -49,7 +51,7 @@ export default function Login(props) {
                     />}</Button>
 
                 </Inputs>
-                <Link to='/cadastro' data-test='signup-link'><p className="cadastro" > Não tem uma conta? Cadastre-se</p></Link>
+                <Link to='/cadastro' data-test='signup-link'><p className="cadastro" > Don't have an account yet? Register</p></Link>
 
             </Home>
 
@@ -78,7 +80,7 @@ background: #1b7a00;
 }
 `
 
-const Imagem = styled.div`
+export const Imagem = styled.div`
 
 h1{
     font-family: 'Playball';
@@ -87,7 +89,7 @@ h1{
     font-size: 68.982px;
     line-height: 86px;
     text-align: center;
-    color: #126BA5;
+    color: #000000;
 `
 
 
@@ -115,7 +117,7 @@ input{
 `
 
 const Button = styled.button`
-    background: #f4b961;
+    background: #3a9a1f;
     border-radius: 4.63636px;
     width: 303px;
     height: 45px;

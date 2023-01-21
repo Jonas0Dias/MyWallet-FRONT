@@ -7,21 +7,38 @@ import { ThreeDots } from "react-loader-spinner";
 import { Animated } from "react-animated-css";
 import env from 'react-dotenv';
 
-export default function Home() {
+export default function Home(props) {
+    const [data, setData] = React.useState([1])
+    console.log(data)
+    const config = {
+        headers: {
+            id: props.dadosusuario.id}
+    }
+    React.useEffect(() => {
+
+        axios.get(`${process.env.REACT_APP_API_URL}/home`, config).then((res) => {
+            console.log(res)
+            setData(res.data)
+    })
+    }, [])
+
     return (
-        <HomeStyled>
+        <HomeStyled type = {data.type}>
             <header>
-                <p>Olá, Fulano</p>
+                <p>{`Hola, ${props.dadosusuario.name}!`}</p>
                 <img src="assets/img/sair.png"></img>
             </header>
 
             <section>
-            <p>Não há registros de entrada ou saída</p>
+            {data.length===0 ? <p>Não há registros de entrada ou saída</p> : 
+            <>
+            {data.map(i => <><div><h1>{i.date}</h1><h2>{i.description}</h2><h3>{`R$ ${i.value}`}</h3>  </div></>)}
+            </>}
             </section>
 
             <footer>
-            <div><Link to='/nova-entrada'><img src="assets/img/+.png"></img></Link></div>
-            <div><Link to='/nova-saida'><img src="assets/img/-.png"></img></Link></div>
+            <div><Link to='/nova-entrada'><img title="Adicionar nova entrada" src="assets/img/+.png"></img></Link></div>
+            <div><Link to='/nova-saida'><img title="Adicionar nova saída" src="assets/img/-.png"></img></Link></div>
 
             </footer>
         </HomeStyled>
@@ -48,13 +65,16 @@ header{
     img{
         width: 25px;
     }
+    
 }
 section{
+    padding:20px;
     height:67%;
     background:white;
     border-radius: 5px;
     display:flex;
-    justify-content:center;
+    justify-content: flex-start;
+    flex-direction: column;
     align-items:center;
     p{
     font-family: 'Raleway';
@@ -63,6 +83,15 @@ section{
     font-size: 25px;
     text-align: center;
     color: #868686;
+    }
+    div{
+        width:100%;
+        display:flex;
+        justify-content: space-between;
+        margin-top:10px;
+    }
+    h3{
+       
     }
 }
 footer{
