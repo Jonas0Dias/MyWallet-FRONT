@@ -18,7 +18,7 @@ export default function NewEntry(props){
     }
     console.log({...props.dadosentrada, id: props.dadosusuario.id, type: 'entry'})
     return(
-        <HomeStyled>
+        <New>
             <p className="title">Nova Entrada</p>
             <div className="data">
                 <input type='number' placeholder="Valor"  disabled={props.habilitado} onChange={e => props.setDadosEntrada({ ...props.dadosentrada, value: parseInt(e.target.value) })}></input>
@@ -49,6 +49,119 @@ export default function NewEntry(props){
                 {/* Tem que fazer um post pra /newentry e enviar o valor, a decrição e o  id do usuário(esse vem de dadosusuario) */}
 
             </div>
-        </HomeStyled>
+        </New>
     )
 }
+
+export const New = styled.div`
+height: 600px;
+background:#1b7a00;
+padding-left: 24px;
+padding-right: 24px;
+header{
+    height: 80px;
+    color: #FFFFFF;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    p{
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 25px;
+    }
+    img{
+        width: 25px;
+    }
+    button {
+        display:flex;
+    justify-content: center;
+    align-items:center;
+    }
+}
+section{
+    height: 431px;
+    padding:20px;
+    background:white;
+    border-radius: 5px;
+    display:flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items:center;
+    p{
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 25px;
+    text-align: center;
+    color: #868686;
+    }
+    h1{
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 20px;
+    }
+}
+footer{
+    height: 100px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    box-sizing: border-box;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    div{
+        background:#3a9a1f;
+        height: 100%;
+        width: 49%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        img{
+            width:25px;
+        }
+    }
+}
+
+.data{
+    display:flex;
+    flex-direction:column;
+    height:188px;
+    justify-content: space-between;
+    input{
+        width: 100%;
+        height: 58px;
+        background: #FFFFFF;
+        border-radius: 5px;
+    }
+    button{
+        width: 101.5%;
+        height: 46px;
+        background: #3a9a1f;
+        border-radius: 5px;
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 23px;
+        color: #FFFFFF;
+        border-style: none;
+    }
+    
+}
+.title{
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 31px;
+    color: #FFFFFF;
+    padding-bottom: 24px;
+    padding-top: 24px;
+}
+
+
+`

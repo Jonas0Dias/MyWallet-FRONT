@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
 import { Animated } from "react-animated-css";
 import env from 'react-dotenv';
-import { HomeStyled } from "./Home";
+import { New } from "./NewEntry";
 
 export default function NewEntry(props){
     const navigate = useNavigate();
@@ -17,7 +17,7 @@ export default function NewEntry(props){
             id: props.dadosusuario.id}
     }
     return(
-        <HomeStyled>
+        <New>
             <p className="title">Nova Saída</p>
             <div className="data">
                 <input type='number' placeholder="Valor"  disabled={props.habilitado} onChange={e => props.setDadosSaida({ ...props.dadossaida, value: parseInt(e.target.value) })}></input>
@@ -48,6 +48,6 @@ export default function NewEntry(props){
                 {/* Tem que fazer um post pra /newentry e enviar o valor, a decrição e o  id do usuário(esse vem de dadosusuario) */}
 
             </div>
-        </HomeStyled>
+        </New>
     )
 }

@@ -10,7 +10,7 @@ import env from 'react-dotenv';
 export default function Home(props) {
     const [data, setData] = React.useState([])
     const [total, setTotal] = React.useState(0)
-    
+    const navigate=useNavigate();
     console.log(total)
     const config = {
         headers: {
@@ -38,7 +38,9 @@ export default function Home(props) {
         <HomeStyled >
             <header>
                 <p>{`Hola, ${props.dadosusuario.name}!`}</p>
-                <img src="assets/img/sair.png"></img>
+                <img src="assets/img/sair.png" onClick={() => {
+                    navigate('/')
+                    window.location.reload(true)}}></img>
             </header>
 
             <section>
@@ -107,7 +109,7 @@ const Expense=styled.div`
 
 `
 
-export const HomeStyled = styled.div`
+const HomeStyled = styled.div`
 height: 650px;
 background:#1b7a00;
 padding-left: 24px;
