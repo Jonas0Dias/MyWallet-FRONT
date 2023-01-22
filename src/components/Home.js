@@ -8,22 +8,34 @@ import { Animated } from "react-animated-css";
 import env from 'react-dotenv';
 
 export default function Home(props) {
-    const [data, setData] = React.useState([1])
-    console.log(data)
+    const [data, setData] = React.useState([])
+    const [total, setTotal] = React.useState(0)
+    
+    console.log(total)
     const config = {
         headers: {
             id: props.dadosusuario.id}
     }
     React.useEffect(() => {
-
         axios.get(`${process.env.REACT_APP_API_URL}/home`, config).then((res) => {
             console.log(res)
             setData(res.data)
+            let values=0
+
+            res.data.map(i => {
+                if (i.type==='entry'){
+                    return values += parseInt(i.value)
+                } else{
+                    return values -= parseInt(i.value)
+                }
+                 
+                  
     })
-    }, [])
+            setTotal(values)
+    })}, [])
 
     return (
-        <HomeStyled type = {data.type}>
+        <HomeStyled >
             <header>
                 <p>{`Hola, ${props.dadosusuario.name}!`}</p>
                 <img src="assets/img/sair.png"></img>
@@ -31,9 +43,16 @@ export default function Home(props) {
 
             <section>
             {data.length===0 ? <p>Não há registros de entrada ou saída</p> : 
-            <>
-            {data.map(i => <><div><h1>{i.date}</h1><h2>{i.description}</h2><h3>{`R$ ${i.value}`}</h3>  </div></>)}
-            </>}
+            <ExpenseList>
+            {
+                
+            data.map(i => <Expense type = {i.type}><h1>{i.date}</h1><h2>{i.description}</h2><h3>{`R$ ${i.value}`}</h3>  </Expense>
+            
+            )
+            
+            }
+            </ExpenseList>}
+            <Total total={total}><h1>SALDO</h1><h2>{`R$ ${total}`}</h2></Total>
             </section>
 
             <footer>
@@ -45,13 +64,56 @@ export default function Home(props) {
     )
 }
 
+
+const Total=styled.div`
+    margin-top: 10px;
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    h2{
+        color: ${props => props.total>0 ?  '#03AC00' : '#C70000'}
+    }
+`
+
+const ExpenseList=styled.div`
+    overflow-y: auto;
+    width:100%;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items:center;
+    display:flex;
+`
+
+const Expense=styled.div`
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    margin-top:10px;
+    font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 19px;
+        text-align: right;
+    h3{
+        color: ${props => props.type==='entry' ? '#03AC00' : '#C70000' } 
+    }
+    h2{
+        color: #000000;
+    }
+    h1{
+        color: #C6C6C6;
+    }
+
+`
+
 export const HomeStyled = styled.div`
+height: 650px;
 background:#1b7a00;
-height: 100vh;
 padding-left: 24px;
 padding-right: 24px;
 header{
-    height: 12%;
+    height: 80px;
     color: #FFFFFF;
     display:flex;
     justify-content:space-between;
@@ -65,15 +127,19 @@ header{
     img{
         width: 25px;
     }
-    
+    button {
+        display:flex;
+    justify-content: center;
+    align-items:center;
+    }
 }
 section{
+    height: 431px;
     padding:20px;
-    height:67%;
     background:white;
     border-radius: 5px;
     display:flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     flex-direction: column;
     align-items:center;
     p{
@@ -84,18 +150,16 @@ section{
     text-align: center;
     color: #868686;
     }
-    div{
-        width:100%;
-        display:flex;
-        justify-content: space-between;
-        margin-top:10px;
-    }
-    h3{
-       
+    h1{
+        font-family: 'Raleway';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 17px;
+        line-height: 20px;
     }
 }
 footer{
-    height: 21%;
+    height: 100px;
     padding-top: 14px;
     padding-bottom: 14px;
     box-sizing: border-box;

@@ -64,7 +64,7 @@ export default function Login(props) {
 
 
 const Home = styled.div`
-height:100vh;
+height: 600px;
 display:flex;
 justify-content: center;
 flex-direction: column;
