@@ -13,12 +13,16 @@ export default function Login(props) {
     const [entrar, setEntrar] = React.useState('Log in')
     return (
 
-        <Animated animationIn="bounceInLeft" animationOut="bounceOutLeft" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
+        
             <Home>
+               
+                <Animated animationIn="slideInLeft" animationOut="slideOutRight" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
                 <Imagem>
                     <img src="./assets/img/carterita.png"></img>
                     <h1>Carterita</h1>
                 </Imagem>
+                </Animated>
+                <Animated   animationIn="slideInRight" animationOut="slideInLeft" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
                 <Inputs>
 
                     <input data-test='email-input' type='email' placeholder="email" disabled={props.habilitado} onChange={e => props.setLogin({ ...props.login, email: e.target.value })}></input>
@@ -52,10 +56,10 @@ export default function Login(props) {
 
                 </Inputs>
                 <Link to='/cadastro' data-test='signup-link'><p className="cadastro" > Don't have an account yet? Register</p></Link>
-
+                </Animated>
             </Home>
 
-        </Animated>
+     
 
 
 
@@ -64,7 +68,7 @@ export default function Login(props) {
 
 
 const Home = styled.div`
-height: 600px;
+height: 100vh;
 display:flex;
 justify-content: center;
 flex-direction: column;
@@ -77,6 +81,11 @@ background: #1b7a00;
     font-size: 15px;
     line-height: 18px;
     color: #FFFFFF;
+}
+.animation{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
 }
 `
 

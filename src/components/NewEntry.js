@@ -46,6 +46,7 @@ export default function NewEntry(props){
                     wrapperClassName=""
                     visible={true}
                 />}</button>
+                <button>Voltar</button>
                 {/* Tem que fazer um post pra /newentry e enviar o valor, a decrição e o  id do usuário(esse vem de dadosusuario) */}
 
             </div>
@@ -74,6 +75,7 @@ header{
         width: 25px;
     }
     button {
+       
         display:flex;
     justify-content: center;
     align-items:center;
@@ -132,12 +134,15 @@ footer{
     height:188px;
     justify-content: space-between;
     input{
+        margin-top:10px;
         width: 100%;
         height: 58px;
         background: #FFFFFF;
         border-radius: 5px;
     }
+        
     button{
+        margin-top:10px;
         width: 101.5%;
         height: 46px;
         background: #3a9a1f;
