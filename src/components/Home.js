@@ -110,7 +110,7 @@ const Expense=styled.div`
 `
 
 const HomeStyled = styled.div`
-height: 650px;
+min-height: 100vh;
 background:#1b7a00;
 padding-left: 24px;
 padding-right: 24px;

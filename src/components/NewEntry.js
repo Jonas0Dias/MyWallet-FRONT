@@ -55,7 +55,7 @@ export default function NewEntry(props){
 }
 
 export const New = styled.div`
-height: 600px;
+min-height: 100vh;
 background:#1b7a00;
 padding-left: 24px;
 padding-right: 24px;
