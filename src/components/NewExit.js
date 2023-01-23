@@ -45,6 +45,7 @@ export default function NewEntry(props){
                     wrapperClassName=""
                     visible={true}
                 />}</button>
+                <button>Voltar</button>
                 {/* Tem que fazer um post pra /newentry e enviar o valor, a decrição e o  id do usuário(esse vem de dadosusuario) */}
 
             </div>
