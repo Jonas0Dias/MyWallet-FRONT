@@ -21,7 +21,7 @@ export default function NewEntry(props){
         <New>
             <p className="title">Nova Entrada</p>
             <div className="data">
-                <input type='number' placeholder="Valor"  disabled={props.habilitado} onChange={e => props.setDadosEntrada({ ...props.dadosentrada, value: parseInt(e.target.value) })}></input>
+                <input type='number' placeholder="Valor"  disabled={props.habilitado} onChange={e => props.setDadosEntrada({ ...props.dadosentrada, value: parseFloat(e.target.value) })}></input>
                 <input placeholder="Descrição"  disabled={props.habilitado} onChange={e => props.setDadosEntrada({ ...props.dadosentrada, description: e.target.value })}></input>
                 <button onClick={() => {
                     console.log({...props.dadosentrada, ...props.dadosusuario.id, type: 'entry'})
