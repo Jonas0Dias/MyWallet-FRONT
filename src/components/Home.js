@@ -24,9 +24,9 @@ export default function Home(props) {
 
             res.data.map(i => {
                 if (i.type==='entry'){
-                    return values += parseInt(i.value)
+                    return values += parseFloat(i.value)
                 } else{
-                    return values -= parseInt(i.value)
+                    return values -= parseFloat(i.value)
                 }
                  
                   
