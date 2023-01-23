@@ -17,7 +17,7 @@ export default function Home(props) {
             id: props.dadosusuario.id}
     }
     React.useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/home`, config).then((res) => {
+        axios.get(`https://carterita-api.onrender.com/home`, config).then((res) => {
             console.log(res)
             setData(res.data)
             let values=0

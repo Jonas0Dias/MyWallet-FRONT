@@ -31,7 +31,7 @@ export default function Cadastro(props){
         <Button onClick={() => {
             setEntrar('')
             props.setHabilitado(true)
-            axios.post(`${process.env.REACT_APP_API_URL}/signup`, usuario).then(()=>  {
+            axios.post('https://carterita-api.onrender.com/signup', usuario).then(()=>  {
                 props.setHabilitado(false);
                 navigate('/')
         }).catch(() => {

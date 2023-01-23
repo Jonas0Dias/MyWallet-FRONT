@@ -26,7 +26,7 @@ export default function NewEntry(props){
                     console.log({...props.dadosentrada, ...props.dadosusuario.id})
                         setEntrar('')
                         props.setHabilitado(true)
-                        axios.post(`${process.env.REACT_APP_API_URL}/newentryorexit`, {...props.dadossaida, type: 'exit'}, config).then((res) => {
+                        axios.post(`https://carterita-api.onrender.com/newentryorexit`, {...props.dadossaida, type: 'exit'}, config).then((res) => {
                             props.setHabilitado(false);
                             navigate('/home')
                         }).catch(() => {
