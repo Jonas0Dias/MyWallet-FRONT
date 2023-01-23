@@ -46,7 +46,7 @@ export default function NewEntry(props){
                     wrapperClassName=""
                     visible={true}
                 />}</button>
-                
+                <Link to='/home'><button>Voltar</button></Link>
                 {/* Tem que fazer um post pra /newentry e enviar o valor, a decrição e o  id do usuário(esse vem de dadosusuario) */}
 
             </div>
@@ -129,6 +129,9 @@ footer{
 }
 
 .data{
+    a{
+        text-decoration: none;
+    }
     display:flex;
     flex-direction:column;
     height:188px;

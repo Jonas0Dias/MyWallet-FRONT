@@ -60,7 +60,7 @@ export default function Cadastro(props){
 
 
 const Home=styled.div`
-height: 700px;
+height: 100vh;
 display:flex;
 justify-content: center;
 flex-direction: column;
