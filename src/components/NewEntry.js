@@ -154,6 +154,9 @@ footer{
         line-height: 23px;
         color: #FFFFFF;
         border-style: none;
+        justify-content: center;
+        align-items: center;
+        display:flex;
     }
     
 }
