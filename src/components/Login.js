@@ -25,10 +25,10 @@ export default function Login(props) {
                 <Animated   animationIn="slideInRight" animationOut="slideInLeft" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
                 <Inputs>
 
-                    <input data-test='email-input' type='email' placeholder="email" disabled={props.habilitado} onChange={e => props.setLogin({ ...props.login, email: e.target.value })}></input>
-                    <input data-test='password-input' type='password' placeholder="password" disabled={props.habilitado} onChange={e => props.setLogin({ ...props.login, password: e.target.value })}></input>
+                    <input  type='email' placeholder="email" disabled={props.habilitado} onChange={e => props.setLogin({ ...props.login, email: e.target.value })}></input>
+                    <input type='password' placeholder="password" disabled={props.habilitado} onChange={e => props.setLogin({ ...props.login, password: e.target.value })}></input>
 
-                    <Button data-test='login-btn' onClick={() => {
+                    <Button  onClick={() => {
                         setEntrar('')
                         props.setHabilitado(true)
                         axios.post(`https://carterita-api.onrender.com/login`, props.login).then((res) => {
@@ -55,7 +55,7 @@ export default function Login(props) {
                     />}</Button>
 
                 </Inputs>
-                <Link to='/cadastro' data-test='signup-link'><p className="cadastro" > Don't have an account yet? Register</p></Link>
+                <Link to='/cadastro'><p className="cadastro" > Don't have an account yet? Register</p></Link>
                 </Animated>
             </Home>
 

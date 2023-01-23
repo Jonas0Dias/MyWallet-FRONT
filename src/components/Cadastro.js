@@ -23,10 +23,10 @@ export default function Cadastro(props){
         </Imagem>
         <Inputs>
 
-        <input data-test = 'email-input' type='text' placeholder="name" value={usuario.name} onChange={e => setUsuario({...usuario, name: e.target.value})} disabled={props.habilitado}></input>
-        <input data-test ='user-name-input' type='email' placeholder="e-mail" value={usuario.email} onChange={e => setUsuario({...usuario, email: e.target.value})} disabled={props.habilitado}></input>
-        <input data-test ='user-image-input' type='password' placeholder="password" onChange={e => setUsuario({...usuario, password: e.target.value})} disabled={props.habilitado}></input>
-        <input data-test = 'password-input' type='password' placeholder="confirm password" onChange={e => setUsuario({...usuario, passwordConfirmation: e.target.value})} disabled={props.habilitado}></input>
+        <input  type='text' placeholder="name" value={usuario.name} onChange={e => setUsuario({...usuario, name: e.target.value})} disabled={props.habilitado}></input>
+        <input type='email' placeholder="e-mail" value={usuario.email} onChange={e => setUsuario({...usuario, email: e.target.value})} disabled={props.habilitado}></input>
+        <input type='password' placeholder="password" onChange={e => setUsuario({...usuario, password: e.target.value})} disabled={props.habilitado}></input>
+        <input  type='password' placeholder="confirm password" onChange={e => setUsuario({...usuario, passwordConfirmation: e.target.value})} disabled={props.habilitado}></input>
 
         <Button onClick={() => {
             setEntrar('')
@@ -52,7 +52,7 @@ export default function Cadastro(props){
          </Button>
 
         </Inputs>
-        <Link to='/' data-test = 'login-link'><p className="cadastro" > Already have an account? Log in!</p></Link>
+        <Link to='/'><p className="cadastro" > Already have an account? Log in!</p></Link>
 
         </Home>
     )
