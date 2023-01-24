@@ -12,6 +12,8 @@ function App() {
   const [dadosusuario, setDadosUsuario] =  React.useState()
   const [dadosentrada, setDadosEntrada] = React.useState()
   const [dadossaida, setDadosSaida] = React.useState()
+  
+
 
   return (
 

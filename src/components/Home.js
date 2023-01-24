@@ -16,7 +16,11 @@ export default function Home(props) {
         headers: {
             id: props.dadosusuario.id}
     }
+  
+    
     React.useEffect(() => {
+        const audio = new Audio('./assets/carterita.mp3')
+        audio.play();
         axios.get(`https://carterita-api.onrender.com/home`, config).then((res) => {
             console.log(res)
             setData(res.data)

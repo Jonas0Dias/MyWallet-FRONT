@@ -13,6 +13,9 @@ export default function Cadastro(props){
     const [usuario, setUsuario] = React.useState({email:'',name:'',password:'',passwordConfirmation:''})
     const[entrar, setEntrar] = React.useState('Register')
     console.log(usuario)
+
+   
+    
     return(
         <Home>
         <Imagem>
