@@ -7,10 +7,18 @@ import { ThreeDots } from "react-loader-spinner";
 import { Animated } from "react-animated-css";
 import env from 'react-dotenv';
 
-
 export default function Login(props) {
     const navigate = useNavigate();
     const [entrar, setEntrar] = React.useState('Log in')
+   
+    React.useEffect(() => {
+        const audio = new Audio('./assets/carterita.mp3')
+        audio.play();
+
+    }, [])
+
+
+
     return (
 
         
