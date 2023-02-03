@@ -6,14 +6,24 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { Animated } from "react-animated-css";
 import env from 'react-dotenv';
+import anime from "animejs";
 
 export default function Login(props) {
-
+    // anime({
+    //     targets: '.logo',
+    //     translateX:250
+    // })
     
-
+  
+    
+    React.useEffect(() => {
+        const audio = new Audio('./assets/carterita.mp3')
+        audio.play();    
+    }, [])
 
     const navigate = useNavigate();
     const [entrar, setEntrar] = React.useState('Log in')
+   
    
 
     return (
@@ -23,7 +33,7 @@ export default function Login(props) {
                
                 <Animated animationIn="slideInLeft" animationOut="slideOutRight" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
                 <Imagem>
-                    <img src="./assets/img/carterita.png"></img>
+                    <img className="logo" src="./assets/img/carterita.png"></img>
                     <h1>Carterita</h1>
                 </Imagem>
                 </Animated>
@@ -36,7 +46,7 @@ export default function Login(props) {
                     <Button  onClick={() => {
                         setEntrar('')
                         props.setHabilitado(true)
-                        axios.post(`https://carterita-api.onrender.com/login`, props.login).then((res) => {
+                        axios.post(`${process.env.REACT_APP_API_URL}/login`, props.login).then((res) => {
                             console.log(res.data.id)
                             props.setDadosUsuario(res.data)
                             props.setHabilitado(false);
@@ -105,6 +115,7 @@ h1{
     line-height: 86px;
     text-align: center;
     color: #000000;
+}
 `
 
 

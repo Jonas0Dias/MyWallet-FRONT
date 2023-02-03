@@ -6,24 +6,28 @@ import { useNavigate } from "react-router-dom"
 import { ThreeDots } from "react-loader-spinner"
 import { Imagem } from "./Login"
 import env from 'react-dotenv';
-
+import { Animated } from "react-animated-css"
 
 export default function Cadastro(props){
     const navigate=useNavigate();
     const [usuario, setUsuario] = React.useState({email:'',name:'',password:'',passwordConfirmation:''})
     const[entrar, setEntrar] = React.useState('Register')
     console.log(usuario)
-
+    
+    // CadastroAnimeJs();
    
     
     return(
         <Home>
+             <Animated animationIn="slideInLeft" animationOut="slideOutRight" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
         <Imagem>
         
-        <img src="./assets/img/carterita.png"></img>
+        <img className="logo" src="./assets/img/carterita.png"></img>
                     <h1>Carterita</h1>
 
         </Imagem>
+        </Animated>
+        <Animated   animationIn="slideInRight" animationOut="slideInLeft" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
         <Inputs>
 
         <input  type='text' placeholder="name" value={usuario.name} onChange={e => setUsuario({...usuario, name: e.target.value})} disabled={props.habilitado}></input>
@@ -34,7 +38,7 @@ export default function Cadastro(props){
         <Button onClick={() => {
             setEntrar('')
             props.setHabilitado(true)
-            axios.post('https://carterita-api.onrender.com/signup', usuario).then(()=>  {
+            axios.post(`${process.env.REACT_APP_API_URL}/signup`, usuario).then(()=>  {
                 props.setHabilitado(false);
                 navigate('/')
         }).catch(() => {
@@ -56,6 +60,7 @@ export default function Cadastro(props){
 
         </Inputs>
         <Link to='/'><p className="cadastro" > Already have an account? Log in!</p></Link>
+        </Animated>
 
         </Home>
     )

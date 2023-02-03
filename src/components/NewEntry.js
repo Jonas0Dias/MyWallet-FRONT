@@ -4,9 +4,10 @@ import React from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ThreeDots } from "react-loader-spinner";
-import { Animated } from "react-animated-css";
-import env from 'react-dotenv';
-import { HomeStyled } from "./Home";
+import {IoReturnDownBackOutline} from 'react-icons/io5'
+import {BsCheckLg} from 'react-icons/bs'
+
+
 
 export default function NewEntry(props){
     const navigate = useNavigate();
@@ -23,11 +24,12 @@ export default function NewEntry(props){
             <div className="data">
                 <input type='number' placeholder="Valor"  disabled={props.habilitado} onChange={e => props.setDadosEntrada({ ...props.dadosentrada, value: parseFloat(e.target.value) })}></input>
                 <input placeholder="Descrição"  disabled={props.habilitado} onChange={e => props.setDadosEntrada({ ...props.dadosentrada, description: e.target.value })}></input>
+                <Buttons>
                 <button onClick={() => {
                     console.log({...props.dadosentrada, ...props.dadosusuario.id, type: 'entry'})
                         setEntrar('')
                         props.setHabilitado(true)
-                        axios.post(`https://carterita-api.onrender.com/newentryorexit`, {...props.dadosentrada, type: 'entry'}, config).then((res) => {
+                        axios.post(`${process.env.REACT_APP_API_URL}/newentryorexit`, {...props.dadosentrada, type: 'entry'}, config).then((res) => {
                             props.setHabilitado(false);
                             navigate('/home')
                         }).catch(() => {
@@ -36,7 +38,7 @@ export default function NewEntry(props){
                             setEntrar('Salvar Entrada')
 
                         })
-                    }} >{entrar === 'Salvar Entrada' ? entrar : <ThreeDots
+                    }} >{entrar === 'Salvar Entrada' ? <BsCheckLg></BsCheckLg> : <ThreeDots
                     height="80"
                     width="80"
                     radius="9"
@@ -46,7 +48,10 @@ export default function NewEntry(props){
                     wrapperClassName=""
                     visible={true}
                 />}</button>
-                <Link to='/home'><button>Voltar</button></Link>
+                <Link to='/home'><button className="return"><IoReturnDownBackOutline ></IoReturnDownBackOutline></button></Link>
+                </Buttons>
+                
+                
                 {/* Tem que fazer um post pra /newentry e enviar o valor, a decrição e o  id do usuário(esse vem de dadosusuario) */}
 
             </div>
@@ -54,87 +59,24 @@ export default function NewEntry(props){
     )
 }
 
+
+const Buttons=styled.div`
+display: flex;
+justify-content: space-between;
+`
+
+
 export const New = styled.div`
 min-height: 100vh;
 background:#1b7a00;
 padding-left: 24px;
 padding-right: 24px;
-header{
-    height: 80px;
-    color: #FFFFFF;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    p{
-        font-family: 'Raleway';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 25px;
-    }
-    img{
-        width: 25px;
-    }
-    button {
-       
-        display:flex;
-    justify-content: center;
-    align-items:center;
-    }
-}
-section{
-    height: 431px;
-    padding:20px;
-    background:white;
-    border-radius: 5px;
-    display:flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items:center;
-    p{
-    font-family: 'Raleway';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 25px;
-    text-align: center;
-    color: #868686;
-    }
-    h1{
-        font-family: 'Raleway';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 17px;
-        line-height: 20px;
-    }
-}
-footer{
-    height: 100px;
-    padding-top: 14px;
-    padding-bottom: 14px;
-    box-sizing: border-box;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    div{
-        background:#3a9a1f;
-        height: 100%;
-        width: 49%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 5px;
-        img{
-            width:25px;
-        }
-    }
-}
-
 .data{
     a{
         text-decoration: none;
     }
     display:flex;
     flex-direction:column;
-    height:188px;
     justify-content: space-between;
     input{
         margin-top:10px;
@@ -146,20 +88,23 @@ footer{
         
     button{
         margin-top:10px;
-        width: 101.5%;
-        height: 46px;
+        width: 100px;
+        height: 100px;
         background: #3a9a1f;
-        border-radius: 5px;
+        border-radius: 50%;
         font-family: 'Raleway';
         font-style: normal;
         font-weight: 700;
-        font-size: 20px;
+        font-size: 30px;
         line-height: 23px;
         color: #FFFFFF;
         border-style: none;
         justify-content: center;
         align-items: center;
         display:flex;
+    }
+    .return{
+        background-color: #dd2d2d;
     }
     
 }
