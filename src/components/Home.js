@@ -6,7 +6,6 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { Animated } from "react-animated-css";
 import env from 'react-dotenv';
-import anime from 'animejs/lib/anime.es.js';
 import { AiFillDelete } from 'react-icons/ai'
 import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa'
 
@@ -88,6 +87,8 @@ export default function Home(props) {
     )
 }
 
+const Filtro = styled.input`
+`
 
 const Total = styled.div`
     margin-top: 10px;

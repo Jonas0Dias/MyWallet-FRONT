@@ -6,7 +6,6 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { Animated } from "react-animated-css";
 import env from 'react-dotenv';
-import anime from "animejs";
 
 export default function Login(props) {
     // anime({
