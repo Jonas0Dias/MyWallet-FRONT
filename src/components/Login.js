@@ -8,17 +8,12 @@ import { Animated } from "react-animated-css";
 import env from 'react-dotenv';
 
 export default function Login(props) {
-    // anime({
-    //     targets: '.logo',
-    //     translateX:250
-    // })
-    
-  
+
     
     React.useEffect(() => {
         const audio = new Audio('./assets/carterita.mp3')
-        audio.play();    
-    }, [])
+        audio.play();  
+    }, []);
 
     const navigate = useNavigate();
     const [entrar, setEntrar] = React.useState('Log in')
@@ -46,10 +41,8 @@ export default function Login(props) {
                         setEntrar('')
                         props.setHabilitado(true)
                         axios.post(`${process.env.REACT_APP_API_URL}/login`, props.login).then((res) => {
-                            console.log(res.data.id)
                             props.setDadosUsuario(res.data)
                             props.setHabilitado(false);
-                            console.log(res)
                             navigate('/home')
                         }).catch(() => {
                             alert('Usuário ou senha incorretos')

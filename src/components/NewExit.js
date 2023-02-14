@@ -7,6 +7,9 @@ import { ThreeDots } from "react-loader-spinner";
 import { Animated } from "react-animated-css";
 import env from 'react-dotenv';
 import { New } from "./NewEntry";
+import { Buttons } from "./NewEntry";
+import {IoReturnDownBackOutline} from 'react-icons/io5'
+import {BsCheckLg} from 'react-icons/bs'
 
 export default function NewEntry(props){
     const navigate = useNavigate();
@@ -18,10 +21,17 @@ export default function NewEntry(props){
     }
     return(
         <New>
+            <select>
+                <option>teste</option>
+                <option>teste</option>
+                <option>teste</option>
+            </select>
+            
             <p className="title">Nova Saída</p>
             <div className="data">
                 <input type='number' placeholder="Valor"  disabled={props.habilitado} onChange={e => props.setDadosSaida({ ...props.dadossaida, value: parseFloat(e.target.value) })}></input>
                 <input placeholder="Descrição"  disabled={props.habilitado} onChange={e => props.setDadosSaida({ ...props.dadossaida, description: e.target.value })}></input>
+                <Buttons>
                 <button onClick={() => {
                     console.log({...props.dadosentrada, ...props.dadosusuario.id})
                         setEntrar('')
@@ -35,7 +45,7 @@ export default function NewEntry(props){
                             setEntrar('Salvar Saída')
 
                         })
-                    }} >{entrar === 'Salvar Saída' ? entrar : <ThreeDots
+                    }} >{entrar === 'Salvar Saída' ? <BsCheckLg></BsCheckLg> : <ThreeDots
                     height="80"
                     width="80"
                     radius="9"
@@ -45,7 +55,8 @@ export default function NewEntry(props){
                     wrapperClassName=""
                     visible={true}
                 />}</button>
-                <Link to='/home'><button>Voltar</button></Link>
+                <Link to='/home'><button className="return"><IoReturnDownBackOutline ></IoReturnDownBackOutline></button></Link>
+                </Buttons>
                 {/* Tem que fazer um post pra /newentry e enviar o valor, a decrição e o  id do usuário(esse vem de dadosusuario) */}
 
             </div>

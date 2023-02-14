@@ -60,7 +60,7 @@ export default function NewEntry(props){
 }
 
 
-const Buttons=styled.div`
+export const Buttons=styled.div`
 display: flex;
 justify-content: space-between;
 `
