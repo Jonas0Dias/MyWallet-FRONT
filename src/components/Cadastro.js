@@ -74,7 +74,11 @@ justify-content: center;
 flex-direction: column;
 align-items: center;
 background: #1b7a00;
+a{
+
+}
 .cadastro{
+    text-align: center;
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 700;

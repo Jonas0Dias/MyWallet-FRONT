@@ -6,17 +6,17 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 import { Animated } from "react-animated-css";
 import env from 'react-dotenv';
-import { AiFillDelete,AiFillEdit,AiFillCheckCircle } from 'react-icons/ai'
-import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa'
-import {MdCancel} from 'react-icons/md'
-
+import { AiFillCheckCircle } from 'react-icons/ai';
+import { FaPlusCircle, FaMinusCircle } from 'react-icons/fa';
+import { MdCancel } from 'react-icons/md';
+import Expense from "./Expense";
 
 export default function Home(props) {
     const [data, setData] = React.useState([])
     const [total, setTotal] = React.useState(0)
     const [edit, setEdit] = React.useState(false)
-    const[editdata, setEditData] = React.useState({value:"",description:"", id:""})
-    const[load, setLoad] = React.useState(false)
+    const [editdata, setEditData] = React.useState({ value: "", description: "", id: "" })
+    const [load, setLoad] = React.useState(false)
 
     const navigate = useNavigate();
     console.log(total)
@@ -25,26 +25,25 @@ export default function Home(props) {
             id: props.dadosusuario.id
         }
     }
-    
 
-    let values = 0
-    const renderHome= function () {
+
+     let values = 0
+    const renderHome = function () {
         axios.get(`${process.env.REACT_APP_API_URL}/home`, config).then((res) => {
             console.log(res)
-            res.data.map(i => 
-                {
+            res.data.map(i => {
 
-                    if (i.type === 'entry') {
-                        console.log(values)
-                        values += parseFloat(i.value)
-                    } else {
-                        console.log(values)
-                        values -= parseFloat(i.value)
-                    }
-
+                if (i.type === 'entry') {
+                    console.log(values)
+                    values += parseFloat(i.value)
+                } else {
+                    console.log(values)
+                    values -= parseFloat(i.value)
                 }
-                
-                )
+
+            }
+
+            )
             // console.log(values)
             setTotal(values)
             setData(res.data)
@@ -53,48 +52,48 @@ export default function Home(props) {
 
 
     React.useEffect(() => {
-       
+
         renderHome()
     }, [])
 
-    
+
     return (
-        
+
         <HomeStyled >
             <DivOpacity0 edit={edit}>
-            <Animated  className="divEdit" animationIn="bounceInDown" animationOut="bounceOutDown" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
-                <DivEdit edit={edit}>
-                <input 
-                type="number"
-                placeholder="Insira o valor" 
-                value={editdata.value}
-                onChange={e => setEditData({...editdata, value:e.target.value})}
-                >
+                <Animated className="divEdit" animationIn="bounceInDown" animationOut="bounceOutDown" animationInDuration={1000} animationOutDuration={1000} isVisible={true}>
+                    <DivEdit edit={edit}>
+                        <input
+                            type="number"
+                            placeholder="Insira o novo valor"
+                            value={editdata.value}
+                            onChange={e => setEditData({ ...editdata, value: e.target.value })}
+                        >
 
-                </input>
-                <input 
-                type="text"
-                placeholder="Insira a descrição"
-                value={editdata.description}
-                onChange={e => setEditData({...editdata, description:e.target.value})}
-                ></input>
-                <div>
+                        </input>
+                        <input
+                            type="text"
+                            placeholder="Insira a nova descrição"
+                            value={editdata.description}
+                            onChange={e => setEditData({ ...editdata, description: e.target.value })}
+                        ></input>
+                        <div>
 
-                <Cancelar><MdCancel className="cancel" onClick={() => {
-                    setEdit(!edit)
-                }}></MdCancel></Cancelar>
+                            <Cancelar><MdCancel className="cancel" onClick={() => {
+                                setEdit(!edit)
+                            }}></MdCancel></Cancelar>
 
-                <Confirmar>{}<AiFillCheckCircle className="confirm" onClick={() => {
-                    axios.put(`${process.env.REACT_APP_API_URL}/${editdata.id}`, {value:editdata.value, description:editdata.description}).then(resp => {
-                        setEdit(!edit)
-                        renderHome();
-                        setEditData({value:"",description:"", id:""})
-                    })
-                }}></AiFillCheckCircle></Confirmar>
-                </div>
-                
-                </DivEdit></Animated></DivOpacity0>
-            
+                            <Confirmar>{ }<AiFillCheckCircle className="confirm" onClick={() => {
+                                axios.put(`${process.env.REACT_APP_API_URL}/${editdata.id}`, { value: editdata.value, description: editdata.description }).then(resp => {
+                                    setEdit(!edit)
+                                    renderHome();
+                                    setEditData({ value: "", description: "", id: "" })
+                                })
+                            }}></AiFillCheckCircle></Confirmar>
+                        </div>
+
+                    </DivEdit></Animated></DivOpacity0>
+
             <header>
                 <p>{`Hola, ${props.dadosusuario.name}!`}</p>
                 <img src="assets/img/sair.png" onClick={() => {
@@ -108,48 +107,22 @@ export default function Home(props) {
                     <ExpenseList>
                         {
 
-                            data.map(i => <Expense type={i.type}><h1>{i.date}</h1><h2>{i.description} </h2><h3>{`R$ ${i.value}`}</h3><div className="edit"> <span className="load
-                            ">  <AiFillEdit  onClick={() => {
-                                setEdit(true)
-                                setEditData({...editdata, id: i._id})
-                                console.log('teste')
-                            }}></AiFillEdit></span>
-                               <span className="load"> {load ?  <ThreeDots
-                               className="loader"
-                                            height="100%"
-                                            width="50%"
-                                            align-items="right"
-                                            radius="9"
-                                            color="red"
-                                            ariaLabel="three-dots-loading"
-                                            wrapperStyle={{}}
-                                            wrapperClassName=""
-                                            visible={true}
-                                    /> :   
-                                    <AiFillDelete onClick={() => {
-                                setLoad(!load)
-                                axios.delete(`${process.env.REACT_APP_API_URL}/${i._id}`, config).then(res => {
-                                    
-                                    res.data.map(i => {
+                            data.map(i => 
+                            <Expense 
+                                type={i.type} 
+                                date={i.date} 
+                                description={i.description}
+                                value={i.value}
+                                id={i._id}
+                                config={config}
+                                setTotal={setTotal}
+                                total={total}
+                                setData={setData}
+                                setEditData={setEditData}
+                                setEdit={setEdit}
+                                >
 
-                                        if (i.type === 'entry') {
-                                            values += parseFloat(i.value)
-                                        } else {
-                                            values -= parseFloat(i.value)
-                                        }
-                    
-                                    })
-                                    console.log(values)
-                                    setTotal(values)
-                                    setData(res.data)
-                                    setLoad(false)
-                                })
-
-
-                            }} className="trash"></AiFillDelete>}</span>
-                           
-
-                            </div> </Expense>
+                                </Expense>
 
                             )
 
@@ -168,7 +141,7 @@ export default function Home(props) {
 }
 
 
-const DivOpacity0= styled.div`
+const DivOpacity0 = styled.div`
     left: 0;
     width: 100vw;
     height: 100vh;
@@ -186,7 +159,7 @@ const DivOpacity0= styled.div`
     }
 `
 
-const DivEdit= styled.div`
+const DivEdit = styled.div`
 
 width: 100%;
 height: 200px;
@@ -261,68 +234,6 @@ const ExpenseList = styled.div`
         
     }
     
-`
-
-const Expense = styled.div`
-padding: 5px;
-border-radius: 10px;
-    align-items: center;
-    width:100%;
-    display:flex;
-    justify-content: space-between;
-    margin-top:10px;
-    font-family: 'Raleway';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 19px;
-    text-align: right;
-    animation: animation-expense 2s linear forwards;
-    @keyframes animation-expense {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
-    }
-   
-
-    h3{
-        color: ${props => props.type === 'entry' ? '#03AC00' : '#C70000'} ;
-        width: 20%;
-        text-align: left;
-    }
-    h2{
-        text-align: left;
-        color: #000000;
-        width: 20%;
-        overflow-x: auto;
-    }
-    h1{
-        color: #C6C6C6;
-        width: 20%;
-        text-align: left;
-    }
-.edit{
-    display: flex;
-    justify-content: space-between;
-    width: 20%;
-    .trash{
-        color:red;
-    }
-    .load{
-        width: 50%;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        display:flex;
-        .loader{
-
-            background-color: none;
-        }
-    }
-}
 `
 
 const HomeStyled = styled.div`

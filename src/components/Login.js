@@ -148,8 +148,5 @@ const Button = styled.button`
     justify-content: center;
     align-items:center;
     transition: all 0.3s linear;
-    :hover{
-        scale: 0.9;
-        
-    }
+   
 `
